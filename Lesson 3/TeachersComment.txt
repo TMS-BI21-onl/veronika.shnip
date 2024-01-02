@@ -1,0 +1,4 @@
+Well done!
+
+3.b
+Subquery is not needed. You can use ORDER BY as a last row after all UNIONed queries. In this case it would be treated as a ORDER BY of the last query and will work.
