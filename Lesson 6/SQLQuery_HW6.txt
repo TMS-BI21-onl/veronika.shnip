@@ -1,0 +1,12 @@
+﻿/*3. Создайте объект с параметрами для обновления значения NationalIDNumber в таблице HumanResources.Employee для указанного BusinessEntityID.
+Т.е. объекту будет подаваться 2 значения: BusinessEntityID (для кого изменяем данные) и NationalIDNumber (на какое значение изменяем).
+С помощью данного объекта попробуйте заменить NationalIDNumber на 879341111 для BusinessEntityID= 15.*/
+
+DECLARE @BusinessEntityID INT
+DECLARE @NewNationalIDNumber VARCHAR(20)
+SET @BusinessEntityID = 15
+SET @NewNationalIDNumber = '879341111'
+-- Обновляю NationalIDNumber для указанного BusinessEntityID
+UPDATE HumanResources.Employee
+SET NationalIDNumber = @NewNationalIDNumber
+WHERE BusinessEntityID = @BusinessEntityID
