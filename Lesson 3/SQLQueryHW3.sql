@@ -45,11 +45,10 @@ a)	Выведите названия продуктов и их цену, мод
 /*b)Выведите имена всех вендоров [Purchasing].[Vendor] и имена магазинов [Sales].[Store] 
     одним списком в отсортированном порядке по алфавиту и без дубликатов.*/
 	SELECT Name
-	FROM (SELECT Name
-	      FROM Purchasing.Vendor
-	      UNION
-	      SELECT Name
-	      FROM Sales.Store) AS Names
+	FROM Purchasing.Vendor
+	UNION
+	SELECT Name
+	FROM Sales.Store AS Names
 	ORDER BY Name
 /*c)	Найдите имена продуктов, на которых действовало больше, чем 1 специальное предложение. Таблицы [Sales].[SpecialOffer], 
         [Sales].[SpecialOfferProduct], [Production].[Product].*/
