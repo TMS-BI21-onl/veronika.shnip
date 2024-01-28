@@ -1,0 +1,4 @@
+Well done!
+
+7
+And what if employee has worked in multiple departments? Each row in job history will give us "left the company" row, which is not correct.
