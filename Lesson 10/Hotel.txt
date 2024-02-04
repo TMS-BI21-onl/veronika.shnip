@@ -1,0 +1,69 @@
+    CREATE TABLE Clients (
+    ClientID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Email NVARCHAR(100),
+    PhoneNumber NVARCHAR(20)
+);
+
+    CREATE TABLE Rooms (
+    RoomID INT PRIMARY KEY,
+    RoomNumber INT,
+    RoomType NVARCHAR(50),
+    Price DECIMAL(10, 2)
+);
+
+    CREATE TABLE Staff (
+    StaffID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Position NVARCHAR(50),
+    Salary DECIMAL(10, 2)
+);
+   CREATE TABLE Services (
+    ServiceID INT PRIMARY KEY,
+    ServiceName NVARCHAR(50),
+    Description NVARCHAR(255),
+    Price DECIMAL(10, 2)
+);
+
+    CREATE TABLE Bookings (
+    BookingID INT PRIMARY KEY,
+    ClientID INT FOREIGN KEY REFERENCES Clients(ClientID),
+    RoomID INT FOREIGN KEY REFERENCES Rooms(RoomID),
+    CheckInDate DATE,
+    CheckOutDate DATE,
+    TotalAmount DECIMAL(10, 2)
+);
+
+    CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY,
+    BookingID INT FOREIGN KEY REFERENCES Bookings(BookingID),
+    PaymentDate DATE,
+    Amount DECIMAL(10, 2)
+);
+
+   CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY,
+    ClientID INT FOREIGN KEY REFERENCES Clients(ClientID),
+    RoomID INT FOREIGN KEY REFERENCES Rooms(RoomID),
+    Rating INT,
+    Comment NVARCHAR(255)
+);
+
+Задача 1:
+
+Необходимо подготовить отчет о выручке гостиницы за определенный период. Напишите запрос для расчета общей суммы выручки.
+
+SELECT SUM(TotalAmount) AS TotalRevenue
+FROM Bookings
+WHERE CheckInDate BETWEEN '2024-02-01' AND '2024-03-01';
+
+Задача 2:
+
+Hужно определить, сколько раз каждый клиент совершал бронирования в гостинице. Напишите запрос для подсчета количества бронирований для каждого клиента.
+
+SELECT c.ClientID,c.FirstName,c.LastName, COUNT(b.BookingID) AS BookingCount
+FROM Clients c
+LEFT JOIN Bookings b ON c.ClientID = b.ClientID
+GROUP BY c.ClientID, c.FirstName, c.LastName
